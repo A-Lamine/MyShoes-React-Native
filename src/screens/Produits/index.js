@@ -47,7 +47,6 @@ function Produits({ navigation }) {
     }
 
     useEffect(() => {
-        console.log("two")
         axios.request(options2).then(function (response) {
             setData2(response.data.results)
             setLoading2(false)
@@ -69,7 +68,6 @@ function Produits({ navigation }) {
     const renderFooter2 = () => loading2 && <ActivityIndicator size={30} style={{ padding: 20 }} />
 
     useEffect(() => {
-        console.log("one")
         setLoading(true)
         axios.request(options).then(function (response) {
             setData([...data, ...response.data.results])
@@ -105,7 +103,7 @@ function Produits({ navigation }) {
                 keyExtractor={(item, i) => item.id + i}
                 showsHorizontalScrollIndicator={false}
                 numColumns={2}
-                onEndReached={() => setOffset(offset + 20)}
+                onEndReached={() => setOffset(offset + 1)}
                 ListFooterComponent={renderFooter}
                 onTouchStart={onTouchStart}
                 onTouchEnd={onTouchEnd}

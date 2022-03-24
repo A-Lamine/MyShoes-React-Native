@@ -41,7 +41,6 @@ function Index({ navigation }) {
     useEffect(() => {
         setLoading(true)
         axios.request(options).then(function (response) {
-            console.log("jy rsuis")
             setData([...data, ...response.data.results])
             setLoading(false)
         })
@@ -71,7 +70,7 @@ function Index({ navigation }) {
                 keyExtractor={(item, i) => item.id + i}
                 showsHorizontalScrollIndicator={false}
                 numColumns={2}
-                onEndReached={() => setOffset(offset + 20)}
+                onEndReached={() => setOffset(offset + 1)}
                 ListFooterComponent={renderFooter}
                 onTouchStart={onTouchStart}
                 onTouchEnd={onTouchEnd}
