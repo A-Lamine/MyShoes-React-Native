@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import Inputstyle from "../input"
 
-function Index({ customSearch, setCustomSearch }) {
+function Index({ customSearch, setCustomSearch, onSubmitEditing }) {
     return (
         <Div>
             <Inputstyle
@@ -10,6 +10,7 @@ function Index({ customSearch, setCustomSearch }) {
                 placeholder="Search"
                 value={customSearch}
                 onChangeText={(e) => setCustomSearch(e)}
+                onSubmitEditing={() => onSubmitEditing()}
             />
         </Div>
     )
@@ -20,6 +21,7 @@ const Div = styled.View`
     height: 50px;
     margin: auto;
     flex-direction: row;
+    background-color: white;
 `
 
 export default Index

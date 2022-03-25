@@ -13,6 +13,7 @@ const Input = (props) => {
                 secureTextEntry={props.secu}
                 name={props.name}
                 value={props.value}
+                onSubmitEditing={props.onSubmitEditing}
             />
         </Div>
     )
