@@ -24,5 +24,8 @@ const Div = styled.View`
     width: 100%;
     height: 100%;
     background-color: white;
+    display: flex;
+    text-align: center;
+    justify-content: center;
 `
 export default Index

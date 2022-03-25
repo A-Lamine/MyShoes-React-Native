@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect } from "react"
 import { FlatList, View, ActivityIndicator, TouchableOpacity } from "react-native"
 import axios from "axios"
 import SearchBar from "../../components/search"
-import BtnSerch from "../../components/btn"
 import { useSwipe } from "../../utils/HOOKS/useSwipe"
-import { HOST, KEY } from "../../config/env"
+import { HOST, KEY, API_SEARCH } from "../../config/env"
 import ProductCard from "../../components/ProductCard"
 
 function Index({ navigation }) {
@@ -15,7 +14,7 @@ function Index({ navigation }) {
         navigation.navigate("Produits")
     }
     function onSwipeLeft() {
-        navigation.navigate("Settings")
+        navigation.navigate("Panier")
     }
 
     const [data, setData] = useState([])
@@ -25,7 +24,7 @@ function Index({ navigation }) {
 
     const options = {
         method: "GET",
-        url: "https://the-sneaker-database.p.rapidapi.com/search",
+        url: API_SEARCH,
         params: { limit: "20", page: offset, query: query },
         headers: {
             "x-rapidapi-host": HOST,
@@ -55,14 +54,11 @@ function Index({ navigation }) {
     )
 
     const renderFooter = () => loading && <ActivityIndicator size={30} style={{ padding: 20 }} />
+
     return (
         <>
-            <View style={{ display: "flex", flexDirection: "row" }}>
-                <View style={{ width: "80%" }}>
-                    <SearchBar customSearch={query} setCustomSearch={setQuery} />
-                </View>
-                <BtnSerch action={MySearch} icon="search-outline" text="Chercher" />
-            </View>
+            <SearchBar customSearch={query} setCustomSearch={setQuery} onSubmitEditing={MySearch} />
+
             <FlatList
                 style={{ backgroundColor: "white" }}
                 data={data}

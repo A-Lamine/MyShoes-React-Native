@@ -14,7 +14,7 @@ function Index({ navigation }) {
     const { onTouchStart, onTouchEnd } = useSwipe(onSwipeLeft, onSwipeRight)
 
     function onSwipeRight() {
-        navigation.navigate("Produits")
+        navigation.navigate("Search")
     }
     function onSwipeLeft() {
         navigation.navigate("Settings")
@@ -39,10 +39,14 @@ function Index({ navigation }) {
     const fuse = new Fuse(cart, options)
 
     const fuseSearch = fuse.search(customSearch)
-
+    function onSubmitEditing() {}
     return (
         <>
-            <SearchBar customSearch={customSearch} setCustomSearch={setCustomSearch} />
+            <SearchBar
+                customSearch={customSearch}
+                setCustomSearch={setCustomSearch}
+                onSubmitEditing={onSubmitEditing}
+            />
             {customSearch.length > 2 ? (
                 <FlatList
                     data={fuseSearch}

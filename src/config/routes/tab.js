@@ -25,6 +25,8 @@ const TabNavigator = () => {
                         iconName = focused ? "settings" : "settings-outline"
                     } else if (route.name === "Produits") {
                         iconName = focused ? "home" : "home-outline"
+                    } else if (route.name === "Search") {
+                        iconName = focused ? "search" : "search-outline"
                     }
                     return <MaterialCommunityIcons name={iconName} color={color} size={size} />
                 },
@@ -53,8 +55,8 @@ const TabNavigator = () => {
             ) : ( */}
 
             <Tab.Group>
-                <Tab.Screen name="Search" component={Search} />
                 <Tab.Screen name="Produits" component={Produits} />
+                <Tab.Screen name="Search" component={Search} />
                 <Tab.Screen
                     name="Panier"
                     component={Panier}

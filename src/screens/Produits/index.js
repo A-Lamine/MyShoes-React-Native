@@ -2,7 +2,7 @@ import axios from "axios"
 import React, { useState, useEffect } from "react"
 import { FlatList, TouchableOpacity, ActivityIndicator } from "react-native"
 import ProductCard from "../../components/ProductCard"
-import { API_SNEAKER, HOST, KEY } from "../../config/env"
+import { API_SNEAKER, HOST, KEY, API_FILTRE } from "../../config/env"
 import { useSwipe } from "../../utils/HOOKS/useSwipe"
 import MesCatalogue from "../../components/MesCatalogues"
 
@@ -24,7 +24,7 @@ function Produits({ navigation }) {
 
     function onSwipeRight() {}
     function onSwipeLeft() {
-        navigation.navigate("Panier")
+        navigation.navigate("Search")
     }
 
     const options = {
@@ -39,7 +39,7 @@ function Produits({ navigation }) {
 
     const options2 = {
         method: "GET",
-        url: "https://the-sneaker-database.p.rapidapi.com/brands",
+        url: API_FILTRE,
         headers: {
             "x-rapidapi-host": HOST,
             "x-rapidapi-key": KEY,
@@ -68,12 +68,14 @@ function Produits({ navigation }) {
     const renderFooter2 = () => loading2 && <ActivityIndicator size={30} style={{ padding: 20 }} />
 
     useEffect(() => {
+        console.log("rebelot")
         setLoading(true)
         axios.request(options).then(function (response) {
+            console.log("jy suis")
             setData([...data, ...response.data.results])
             setLoading(false)
         })
-    }, [offset, params])
+    }, [params, offset])
 
     const renderItem = ({ item }) => (
         <>
