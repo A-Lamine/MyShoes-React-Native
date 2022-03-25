@@ -1,3 +1,3 @@
-import { API_LOGIN, API_SNEAKER, HOST, KEY } from "@env"
+import { API_LOGIN, API_SNEAKER, HOST, KEY, API_SEARCH, API_FILTRE } from "@env"
 
-module.exports = { API_LOGIN, API_SNEAKER, HOST, KEY }
+module.exports = { API_LOGIN, API_SNEAKER, HOST, KEY, API_SEARCH, API_FILTRE }
