@@ -12,14 +12,16 @@ function Produits({ navigation }) {
     const [data2, setData2] = useState()
     const [loading2, setLoading2] = useState(true)
     const [brand, setBrand] = useState({})
-
+    const [active, setActive] = useState(false)
     const [offset, setOffset] = useState(0)
     const { onTouchStart, onTouchEnd } = useSwipe(onSwipeLeft, onSwipeRight)
     const [params, setParams] = useState({ limit: "20", page: offset })
 
     useEffect(() => {
-        setData([])
-        setParams({ ...params, brand })
+        if (active) {
+            active && setData([])
+            setParams({ ...params, brand })
+        }
     }, [brand])
 
     function onSwipeRight() {}
@@ -54,6 +56,7 @@ function Produits({ navigation }) {
     }, [])
 
     const ChangeCategorie = async ({ item }) => {
+        setActive(true)
         setBrand(item)
     }
 
@@ -68,14 +71,14 @@ function Produits({ navigation }) {
     const renderFooter2 = () => loading2 && <ActivityIndicator size={30} style={{ padding: 20 }} />
 
     useEffect(() => {
-        console.log("rebelot")
+        console.log(options)
         setLoading(true)
         axios.request(options).then(function (response) {
             console.log("jy suis")
             setData([...data, ...response.data.results])
             setLoading(false)
         })
-    }, [params, offset])
+    }, [params])
 
     const renderItem = ({ item }) => (
         <>
@@ -86,6 +89,10 @@ function Produits({ navigation }) {
     )
 
     const renderFooter = () => loading && <ActivityIndicator size={30} style={{ padding: 20 }} />
+
+    useEffect(() => {
+        setParams({ ...params, page: offset })
+    }, [offset])
     return (
         <>
             <FlatList
