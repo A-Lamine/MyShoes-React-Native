@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react"
 import styled from "styled-components"
 import Panier from "../../config/contexts/panier"
 import { Dimensions } from "react-native"
-import { useSwipe } from "../../utils/HOOKS/useSwipe"
 import { showMessage } from "react-native-flash-message"
 
 function Index({ item }) {
@@ -12,21 +11,13 @@ function Index({ item }) {
         brand,
         estimatedMarketValue,
     } = item
-    const { addorremove } = useContext(Panier)
+    const { addorremove, price, setPrice } = useContext(Panier)
     const { width } = Dimensions.get("window")
     const mywidth = `${width}px`
-    const { onTouchStart, onTouchEnd } = useSwipe(onSwipeLeft, onSwipeRight)
-    function onSwipeLeft() {
-        addorremove(item)
-    }
-
-    function onSwipeRight() {
-        addorremove(item)
-    }
 
     function QtyAdd() {
         qty < 5
-            ? setQty(qty + 1)
+            ? (setQty(qty + 1), setPrice(price + estimatedMarketValue))
             : showMessage({
                   message: "VOUS AVEZ ATTEINT LA QUANTITÉ MAXIMUM POUR CE PRODUIT",
                   type: "warning",
@@ -34,20 +25,12 @@ function Index({ item }) {
     }
 
     function Qtyremove() {
-        qty > 1 ? setQty(qty - 1) : addorremove(item)
+        qty > 1 ? (setQty(qty - 1), setPrice(price - estimatedMarketValue)) : addorremove(item)
     }
 
     const [qty, setQty] = useState(1)
     return (
-        <Div
-            direction="row"
-            width={mywidth}
-            height="90px"
-            items="center"
-            justify="flex-start"
-            onTouchStart={onTouchStart}
-            onTouchEnd={onTouchEnd}
-        >
+        <Div direction="row" width={mywidth} height="90px" items="center" justify="flex-start">
             {thumbnail ? (
                 <Img source={{ uri: `${thumbnail}` }} />
             ) : (
