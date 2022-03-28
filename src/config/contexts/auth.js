@@ -1,8 +1,9 @@
-import React, { useState, createContext, useEffect } from "react"
+import React, { useState, createContext, useEffect, useContext } from "react"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { API_LOGIN } from "../../config/env"
 import axios from "axios"
 import NetInfo from "@react-native-community/netinfo"
+import Panier from "./panier"
 
 const Auth = createContext({
     isLoggedIn: false,
@@ -45,10 +46,12 @@ export const AuthProvider = ({ children }) => {
 
         return () => removeNetInfoSubscription()
     }, [])
+    const { setCart } = useContext(Panier)
 
     const logout = async () => {
-        await AsyncStorage.removeItem("token")
+        setCart([])
         await AsyncStorage.removeItem("Panier")
+        await AsyncStorage.removeItem("token")
         setIsLoggedIn(false)
     }
 

@@ -5,6 +5,7 @@ import TabNavigator from "./tab"
 import Auth from "../contexts/auth"
 import Details from "../../screens/Details"
 import { StatusBar, useColorScheme } from "react-native"
+import Paiement from "../../screens/Paiement"
 
 const StackNavigator = () => {
     const Stack = createNativeStackNavigator()
@@ -28,6 +29,7 @@ const StackNavigator = () => {
                             }}
                         />
                         <Stack.Screen name="Details" component={Details} />
+                        <Stack.Screen name="Paiement" component={Paiement} />
                     </Stack.Group>
                 ) : (
                     <Stack.Screen

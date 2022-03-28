@@ -9,7 +9,6 @@ import { useSwipe } from "../../utils/HOOKS/useSwipe"
 
 function Index({ navigation }) {
     const { cart, price } = useContext(Panier)
-
     const [customSearch, setCustomSearch] = useState("")
     const { onTouchStart, onTouchEnd } = useSwipe(onSwipeLeft, onSwipeRight)
 
@@ -45,7 +44,11 @@ function Index({ navigation }) {
                     >
                         Total à payer: {price}€
                     </Text>
-                    <BtnPayer icon="card-outline" text="Payer" />
+                    <BtnPayer
+                        action={() => navigation.navigate("Paiement")}
+                        icon="card-outline"
+                        text="Payer"
+                    />
                 </>
             )}
         </>

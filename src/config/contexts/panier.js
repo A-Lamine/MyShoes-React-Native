@@ -25,12 +25,13 @@ export const PanierProvider = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        setPrice(
-            cart.reduce(
-                (total, currentValue) => (total = total + currentValue.estimatedMarketValue),
-                0,
-            ),
-        )
+        cart &&
+            setPrice(
+                cart.reduce(
+                    (total, currentValue) => (total = total + currentValue.estimatedMarketValue),
+                    0,
+                ),
+            )
     }, [test])
 
     const addorremove = (item) => {
