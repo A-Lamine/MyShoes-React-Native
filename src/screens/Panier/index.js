@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react"
 import Panier from "../../config/contexts/panier"
-import { FlatList } from "react-native"
+import { FlatList, Text } from "react-native"
 import Fuse from "fuse.js"
 import SearchBar from "../../components/search"
 import ProductPanier from "../../components/ProductPanier"
@@ -8,7 +8,7 @@ import BtnPayer from "../../components/btn"
 import { useSwipe } from "../../utils/HOOKS/useSwipe"
 
 function Index({ navigation }) {
-    const { cart } = useContext(Panier)
+    const { cart, price } = useContext(Panier)
 
     const [customSearch, setCustomSearch] = useState("")
     const { onTouchStart, onTouchEnd } = useSwipe(onSwipeLeft, onSwipeRight)
@@ -30,7 +30,25 @@ function Index({ navigation }) {
         </>
     )
     const renderFooter = () => (
-        <>{cart.length > 0 && <BtnPayer icon="card-outline" text="Payer" />}</>
+        <>
+            {cart.length > 0 && (
+                <>
+                    <Text
+                        style={{
+                            width: "100%",
+                            textAlign: "right",
+                            padding: 10,
+                            fontSize: 17,
+                            fontWeight: "bold",
+                            color: "black",
+                        }}
+                    >
+                        Total à payer: {price}€
+                    </Text>
+                    <BtnPayer icon="card-outline" text="Payer" />
+                </>
+            )}
+        </>
     )
     const options = {
         includeScore: true,
