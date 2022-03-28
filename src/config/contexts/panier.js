@@ -13,11 +13,13 @@ const Panier = createContext({
 export const PanierProvider = ({ children }) => {
     const [cart, setCart] = useState([])
     const [price, setPrice] = useState(0)
+    const [test, setTest] = useState(false)
 
     useEffect(() => {
         const verfyCart = async () => {
             const Carts = await AsyncStorage.getItem("Panier")
             Carts.length > 0 && setCart(JSON.parse(Carts))
+            setTest(true)
         }
         verfyCart()
     }, [])
@@ -29,7 +31,7 @@ export const PanierProvider = ({ children }) => {
                 0,
             ),
         )
-    }, [cart])
+    }, [test])
 
     const addorremove = (item) => {
         const existe = cart.findIndex((element) => element.id === item.id)
