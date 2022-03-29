@@ -3,7 +3,7 @@ import { View } from "react-native"
 import styled from "styled-components"
 import Input from "../../components/input"
 import Auth from "../../config/contexts/auth"
-import Mylook_LOGO from "../../../public/images.jpg"
+import MyShoes_LOGO from "../../../public/images.jpg"
 import IonIcon from "react-native-vector-icons/Ionicons"
 IonIcon.loadFont()
 
@@ -31,7 +31,7 @@ const Login = () => {
     return (
         <>
             <Div>
-                <Img source={Mylook_LOGO} />
+                <Img source={MyShoes_LOGO} />
                 <Div2>
                     <H1 size="30px" color="white" weight="bold" bottom="0px">
                         Login
