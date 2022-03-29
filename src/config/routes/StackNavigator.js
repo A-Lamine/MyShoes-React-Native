@@ -6,12 +6,13 @@ import Auth from "../contexts/auth"
 import Details from "../../screens/Details"
 import { StatusBar, useColorScheme } from "react-native"
 import Paiement from "../../screens/Paiement"
+import Offline from "../../screens/Offline"
 
 const StackNavigator = () => {
     const Stack = createNativeStackNavigator()
     const isDarkMode = useColorScheme() === "dark"
 
-    const { isLoggedIn } = useContext(Auth)
+    const { isLoggedIn, isOffline } = useContext(Auth)
     return (
         <>
             <StatusBar
@@ -19,26 +20,38 @@ const StackNavigator = () => {
                 backgroundColor={isLoggedIn ? "white" : "#34495E"}
             />
             <Stack.Navigator>
-                {isLoggedIn ? (
-                    <Stack.Group>
-                        <Stack.Screen
-                            name="TabNavigator"
-                            component={TabNavigator}
-                            options={{
-                                headerShown: false,
-                            }}
-                        />
-                        <Stack.Screen name="Details" component={Details} />
-                        <Stack.Screen name="Paiement" component={Paiement} />
-                    </Stack.Group>
-                ) : (
+                {isOffline ? (
                     <Stack.Screen
-                        name="Login"
-                        component={Login}
+                        name="Offline"
+                        component={Offline}
                         options={{
                             headerShown: false,
                         }}
                     />
+                ) : (
+                    <>
+                        {isLoggedIn ? (
+                            <Stack.Group>
+                                <Stack.Screen
+                                    name="TabNavigator"
+                                    component={TabNavigator}
+                                    options={{
+                                        headerShown: false,
+                                    }}
+                                />
+                                <Stack.Screen name="Details" component={Details} />
+                                <Stack.Screen name="Paiement" component={Paiement} />
+                            </Stack.Group>
+                        ) : (
+                            <Stack.Screen
+                                name="Login"
+                                component={Login}
+                                options={{
+                                    headerShown: false,
+                                }}
+                            />
+                        )}
+                    </>
                 )}
             </Stack.Navigator>
         </>

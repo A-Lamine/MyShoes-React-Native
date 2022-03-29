@@ -4,13 +4,11 @@ import Produits from "../../screens/Produits"
 import Settings from "../../screens/settings"
 import Panier from "../../screens/Panier"
 import MaterialCommunityIcons from "react-native-vector-icons/Ionicons"
-import Auth from "../contexts/auth"
 import Cart from "../contexts/panier"
 import Search from "../../screens/Search"
 
 const TabNavigator = () => {
     const Tab = createBottomTabNavigator()
-    const { isOffline } = useContext(Auth)
     const { cart } = useContext(Cart)
 
     return (
@@ -32,28 +30,6 @@ const TabNavigator = () => {
                 },
             })}
         >
-            {/*             {isOffline ? (
-                (alert("Vous êtes hors conexion"),
-                (
-                    <Tab.Group>
-                        <Tab.Screen
-                            name="Favories"
-                            component={Favories}
-                            options={{
-                                tabBarIcon: ({ color, size }) => (
-                                    <MaterialCommunityIcons
-                                        name="star-outline"
-                                        color={color}
-                                        size={size}
-                                    />
-                                ),
-                                tabBarLabel: "Mes Favories",
-                            }}
-                        />
-                    </Tab.Group>
-                ))
-            ) : ( */}
-
             <Tab.Group>
                 <Tab.Screen name="Produits" component={Produits} />
                 <Tab.Screen name="Search" component={Search} />
@@ -65,7 +41,6 @@ const TabNavigator = () => {
 
                 <Tab.Screen name="Settings" component={Settings} />
             </Tab.Group>
-            {/*  )} */}
         </Tab.Navigator>
     )
 }
