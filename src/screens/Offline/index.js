@@ -27,7 +27,7 @@ const Img = styled.Image`
     border-radius: 20px;
 `
 const H1 = styled.Text`
-    font-size: 30px;
+    font-size: 20px;
     color: black;
     font-weight: bold;
     padding: 5px;
