@@ -71,10 +71,8 @@ function Produits({ navigation }) {
     const renderFooter2 = () => loading2 && <ActivityIndicator size={30} style={{ padding: 20 }} />
 
     useEffect(() => {
-        console.log(options)
         setLoading(true)
         axios.request(options).then(function (response) {
-            console.log("jy suis")
             setData([...data, ...response.data.results])
             setLoading(false)
         })
@@ -104,6 +102,8 @@ function Produits({ navigation }) {
                 keyExtractor={(item, i) => i}
                 ListFooterComponent={renderFooter2}
                 showsHorizontalScrollIndicator={false}
+                onTouchStart={onTouchStart}
+                onTouchEnd={onTouchEnd}
             />
             <FlatList
                 style={{ backgroundColor: "white" }}

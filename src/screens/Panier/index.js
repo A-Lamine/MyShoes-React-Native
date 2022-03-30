@@ -6,6 +6,7 @@ import SearchBar from "../../components/search"
 import ProductPanier from "../../components/ProductPanier"
 import BtnPayer from "../../components/btn"
 import { useSwipe } from "../../utils/HOOKS/useSwipe"
+import styled from "styled-components"
 
 function Index({ navigation }) {
     const { cart, price } = useContext(Panier)
@@ -32,18 +33,7 @@ function Index({ navigation }) {
         <>
             {cart.length > 0 && (
                 <>
-                    <Text
-                        style={{
-                            width: "100%",
-                            textAlign: "right",
-                            padding: 10,
-                            fontSize: 17,
-                            fontWeight: "bold",
-                            color: "black",
-                        }}
-                    >
-                        Total à payer: {price}€
-                    </Text>
+                    <P>Total à payer: {price}€</P>
                     <BtnPayer
                         action={() => navigation.navigate("Paiement")}
                         icon="card-outline"
@@ -93,5 +83,14 @@ function Index({ navigation }) {
         </>
     )
 }
+
+const P = styled.Text`
+    width: 100%;
+    text-align: right;
+    padding: 7%;
+    font-size: 17px;
+    font-weight: bold;
+    color: black;
+`
 
 export default Index

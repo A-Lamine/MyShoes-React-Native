@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react"
-import { View } from "react-native"
+import { ActivityIndicator } from "react-native"
 import styled from "styled-components"
 import Input from "../../components/input"
 import Auth from "../../config/contexts/auth"
@@ -10,19 +10,22 @@ IonIcon.loadFont()
 const Login = () => {
     const [user, setUser] = useState({ email: "", password: "" })
     const { login } = useContext(Auth)
-
+    const [loading, setLoading] = useState(false)
     const [userEror, setUserEror] = useState(false)
     const [passwordEror, setPasswordEror] = useState(false)
 
     const Connexion = () => {
+        setLoading(true)
         if (user.email.length < 3) {
             setPasswordEror(false)
             setUserEror(true)
             alert("Le UserName doit contenir au minimum 3 caractères")
+            setLoading(false)
         } else if (user.password.length < 8) {
             setPasswordEror(true)
             setUserEror(false)
             alert("Le Mot de Passe doit contenir au minimum 8 caractères")
+            setLoading(false)
         } else {
             login(user.email, user.password)
         }
@@ -63,12 +66,16 @@ const Login = () => {
                         </H1>
                     ) : null}
 
-                    <Btn onPress={() => Connexion()}>
-                        <IonIcon name="log-in-outline" size={20} color="white" weight="bold" />
-                        <H1 size="20px" color="white" weight="bold" bottom="0px">
-                            Connexion
-                        </H1>
-                    </Btn>
+                    {loading ? (
+                        <ActivityIndicator />
+                    ) : (
+                        <Btn onPress={() => Connexion()}>
+                            <IonIcon name="log-in-outline" size={20} color="white" weight="bold" />
+                            <H1 size="20px" color="white" weight="bold" bottom="0px">
+                                Connexion
+                            </H1>
+                        </Btn>
+                    )}
                 </Div2>
             </Div>
         </>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { FlatList, View, ActivityIndicator, TouchableOpacity } from "react-native"
+import { FlatList, ActivityIndicator, TouchableOpacity } from "react-native"
 import axios from "axios"
 import SearchBar from "../../components/search"
 import { useSwipe } from "../../utils/HOOKS/useSwipe"
